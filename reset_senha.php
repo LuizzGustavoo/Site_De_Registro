@@ -1,11 +1,39 @@
+<?php
+session_start();
+include_once('config.php');
+
+if(isset($_POST['submit'])) {
+    $token = $_GET['token'];
+    $nova_senha = $_POST['nova_senha'];
+
+    // Utilizando prepared statements para segurança contra SQL Injection
+    $stmt = $conexao->prepare("SELECT * FROM usuários WHERE token_recuperacao = ? AND validade_token > NOW()");
+    $stmt->bind_param("s", $token);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if($result->num_rows == 1) {
+        // Atualizar a senha do usuário usando prepared statements
+        $stmt_update = $conexao->prepare("UPDATE usuários SET senha = ?, token_recuperacao = NULL, validade_token = NULL WHERE token_recuperacao = ?");
+        $stmt_update->bind_param("ss", $nova_senha, $token);
+        $stmt_update->execute();
+
+        echo '<script>alert("Senha redefinida com sucesso.");</script>';
+        header('Location: login.php');
+        exit(); // Encerra o script após o redirecionamento
+    } else {
+        echo '<script>alert("Link expirado ou inválido.");</script>';
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Redefinir Senha</title>
     <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         @import url('https://fonts.cdnfonts.com/css/bebas-neue');
 
@@ -30,7 +58,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .inputSubmit {
-            background-color: #829d5e; /* Same green color as home page */
+            background-color: #829d5e; /* Mesma cor verde da página inicial */
             width: 100%;
             border: none;
             padding: 15px;
@@ -52,7 +80,7 @@
             letter-spacing: 2px;
             margin-bottom: 10px;
             padding: 10px 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Bebas Neue', sans-serif;
         }
         .back-btn {
             background-color: rgba(0, 0, 0, 0.7);
@@ -75,7 +103,7 @@
             margin-right: 5px;
         }
 
-        /* Responsiveness */
+        /* Responsividade */
         @media (max-width: 768px) {
             .box {
                 width: 90%;
@@ -84,21 +112,16 @@
     </style>
 </head>
 <body>
-    <a href="home.php" class="back-btn"><i class="fas fa-arrow-left"></i>Voltar</a>
+    <a href="login.php" class="back-btn"><i class="fas fa-arrow-left"></i>Voltar</a>
     <div class="box">
-        <h2>Login</h2>
-        <form action="testLogin.php" method="POST">
+        <h2>Redefinir Senha</h2>
+        <form action="recuperar_senha.php?token=<?php echo htmlspecialchars($_GET['token']); ?>" method="POST">
             <div class="inputBox">
-                <input type="text" name="matricula" id="matricula" class="inputUser" placeholder="Matrícula" required>
+                <input type="password" name="nova_senha" id="nova_senha" class="inputUser" placeholder="Nova Senha" required>
             </div>
             <br><br>
-            <div class="inputBox">
-                <input type="password" name="senha" id="senha" class="inputUser" placeholder="Senha" required>
-            </div>
-            <br><br>
-            <input class="inputSubmit" type="submit" name="submit" value="Enviar">
+            <input class="inputSubmit" type="submit" name="submit" value="Redefinir Senha">
         </form>
-        <p>Esqueceu a senha? <a href="recuperar_senha.php" style="color: #829d5e;">Recupere aqui</a>.</p>
     </div>
 </body>
 </html>
