@@ -83,12 +83,10 @@
     </div>
     <div class="social-links">
         <a href="https://github.com/seu-usuario" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://wa.me/seu-numero" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://instagram.com/seu-usuario" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://twitter.com/seu-usuario" target="_blank"><i class="fab fa-twitter"></i></a>
     </div>
-    <div class="author-info">
-        Feito por Luiz Gustavo (vulgo Peixe).<i class="fas fa-check-circle verified-icon"></i>
+    <br>
+    <br>
+    <div class="author-info"> <i class="fas fa-check-circle verified-icon"></i>
     </div>
 </body>
 </html>
