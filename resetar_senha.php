@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         input[type="submit"]:hover {
             background-image: linear-gradient(to right, #568915, green);
         }
-        .mensagem {
+        .mensagem { 
             margin: 10px 0;
             padding: 10px;
             border-radius: 4px;

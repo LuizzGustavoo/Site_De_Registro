@@ -19,7 +19,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-        }
+        } 
         .box {
             position: relative;
             background-color: rgba(0, 0, 0, 0.7);

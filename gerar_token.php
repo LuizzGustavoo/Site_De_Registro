@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "UPDATE usuários SET token_recuperacao = ?, data_token = NOW() WHERE email = ?";
         $stmt = $conexao->prepare($sql);
         $stmt->bind_param('ss', $token, $email);
-        $stmt->execute();
+        $stmt->execute(); 
 
         echo "Você pode redefinir sua senha <a href='$link'>aqui</a>.";
     } else {

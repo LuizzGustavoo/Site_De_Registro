@@ -81,7 +81,7 @@
                 width: 90%;
             }
         }
-    </style>
+    </style> 
 </head>
 <body>
     <a href="home.php" class="back-btn"><i class="fas fa-arrow-left"></i>Voltar</a>

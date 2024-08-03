@@ -65,7 +65,7 @@
         }
     </style>
 </head>
-<body>
+<body> 
     <div class="container">
         <h1>Recupere sua senha</h1>
         <form action="gerar_token.php" method="POST">
