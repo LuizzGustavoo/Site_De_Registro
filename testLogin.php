@@ -1,9 +1,8 @@
-
 <?php
 session_start();
 
 // Verificar se o usuário está logado e se existe uma matrícula na sessão
-if(isset($_SESSION['matricula'])) {
+if (isset($_SESSION['matricula'])) {
     // Incluir o arquivo de configuração do banco de dados
     include_once('config.php');
 
@@ -19,8 +18,7 @@ if(isset($_SESSION['matricula'])) {
 }
 
 // Verificar se o formulário foi submetido e se os campos matricula e senha não estão vazios
-if(isset($_POST['submit']) && !empty($_POST['matricula']) && !empty($_POST['senha'])) {
-
+if (isset($_POST['submit']) && !empty($_POST['matricula']) && !empty($_POST['senha'])) {
     // Incluir o arquivo de configuração do banco de dados
     include_once('config.php');
 
@@ -38,18 +36,30 @@ if(isset($_POST['submit']) && !empty($_POST['matricula']) && !empty($_POST['senh
     $result = $conexao->query($sql);
 
     // Verificar se a consulta retornou algum resultado
-    if(mysqli_num_rows($result) < 1) {
+    if (mysqli_num_rows($result) < 1) {
         // Redirecionar para a página de login se não houver usuário encontrado
         header('Location: login.php');
     } else {
-        // Inserir o tempo de login na tabela de usuários
-        $sql_insert = "UPDATE usuários SET tempo_login = '$tempo_login' WHERE matricula = '$matricula'";
-        $conexao->query($sql_insert);
+        // Obter dados do usuário
+        $user = $result->fetch_assoc();
 
-        // Redirecionar para a página do sistema se o usuário for encontrado
-        header('Location: sistema.php');
+        // Verificar se o usuário é administrador
+        if ($user['is_admin'] == 1) {
+            // Inserir o tempo de login na tabela de usuários
+            $sql_insert = "UPDATE usuários SET tempo_login = '$tempo_login' WHERE matricula = '$matricula'";
+            $conexao->query($sql_insert);
+
+            // Redirecionar para a página de geração de relatório
+            header('Location: gerar_relatorio.php');
+        } else {
+            // Inserir o tempo de login na tabela de usuários
+            $sql_insert = "UPDATE usuários SET tempo_login = '$tempo_login' WHERE matricula = '$matricula'";
+            $conexao->query($sql_insert);
+
+            // Redirecionar para a página do sistema se o usuário for encontrado
+            header('Location: sistema.php');
+        }
     }
-
 } else {
     // Redirecionar para a página de login se o formulário não foi submetido ou se matricula e senha estiverem vazios
     header('Location: login.php');

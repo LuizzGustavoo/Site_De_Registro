@@ -98,7 +98,7 @@
             <br><br>
             <input class="inputSubmit" type="submit" name="submit" value="Enviar">
         </form>
-        <p>Esqueceu a senha? <a href="recuperar_senha.php" style="color: #829d5e;">Recupere aqui</a>.</p>
+        <p>Esqueceu a senha? <a href="solicitar_recuperacao.php" style="color: #829d5e;">Recupere aqui</a>.</p>
     </div>
 </body>
 </html>
