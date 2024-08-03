@@ -82,7 +82,7 @@
         <a href="login.php">Login</a>
     </div>
     <div class="social-links">
-        <a href="https://github.com/seu-usuario" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/LuizzGustavoo/Site_De_Registro" target="_blank"><i class="fab fa-github"></i></a>
     </div>
     <br>
     <br>
