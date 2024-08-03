@@ -65,5 +65,5 @@ if (isset($_POST['submit']) && !empty($_POST['matricula']) && !empty($_POST['sen
     header('Location: login.php');
 }
 
-?>
+?> 
  

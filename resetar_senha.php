@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: #ffffff;
             font-size: 15px;
             cursor: pointer;
-            border-radius: 10px;
+            border-radius: 10px; 
             margin-top: 20px;
         }
         input[type="submit"]:hover {

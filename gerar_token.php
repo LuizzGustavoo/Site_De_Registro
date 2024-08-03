@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $token = bin2hex(random_bytes(16)); // Gerar token
         $link = "http://localhost/Projeto/resetar_senha.php?token=$token";
 
-        // Atualizar token no banco de dados
+        // Atualizar token no banco de dados 
         $sql = "UPDATE usuários SET token_recuperacao = ?, data_token = NOW() WHERE email = ?";
         $stmt = $conexao->prepare($sql);
         $stmt->bind_param('ss', $token, $email);

@@ -15,7 +15,7 @@
             text-align: center;
             color: #ffffff;
             margin: 0;
-            height: 100vh;
+            height: 100vh; 
             display: flex;
             flex-direction: column;
             justify-content: center;

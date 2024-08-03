@@ -102,7 +102,7 @@ if (isset($_POST['gerar_pdf'])) {
         }
 
         input[type="submit"]:hover {
-            background-color: #6d834f; 
+            background-color: #6d834f;  
         }
     </style>
 </head>

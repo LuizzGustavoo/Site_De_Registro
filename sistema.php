@@ -100,7 +100,7 @@ if((isset($_SESSION ['matricula']) == true) and (!isset($_SESSION ['senha']) == 
                 <a href="sair.php" class="btn btn-danger me-3">Sair</a>
             </div>
         </div> 
-    </nav>
+    </nav> 
     <div class="rules">
         <h2>Regras da Biblioteca</h2>
         <ul>
