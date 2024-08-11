@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login | Servidor</title>
     <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -86,17 +86,17 @@
 <body>
     <a href="home.php" class="back-btn"><i class="fas fa-arrow-left"></i>Voltar</a>
     <div class="box">
-        <h2>Login</h2>
-        <form action="testLogin.php" method="POST">
+        <h2>Login - Servidor</h2>
+        <form action="sy_login_servidores.php" method="POST">
             <div class="inputBox">
-                <input type="text" name="matricula" id="matricula" class="inputUser" placeholder="Matrícula" required>
+                <input type="email" name="email" id="email" class="inputUser" placeholder="Email" required>
             </div>
             <br><br>
             <div class="inputBox">
                 <input type="password" name="senha" id="senha" class="inputUser" placeholder="Senha" required>
             </div>
             <br><br>
-            <input class="inputSubmit" type="submit" name="submit" value="Enviar">
+            <input class="inputSubmit" type="submit" name="submit" value="Entrar">
         </form>
         <p>Esqueceu a senha? <a href="solicitar_recuperacao.php" style="color: #829d5e;">Recupere aqui</a>.</p>
     </div>

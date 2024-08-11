@@ -1,27 +1,30 @@
 
 <?php
-    if(isset($_POST['submit'])){    
-        include_once('config.php');
+if (isset($_POST['submit'])) {
+    include_once('config.php');
 
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
-        $matricula = $_POST['matricula'];
-        $telefone = $_POST['telefone'];
-        
-        // Executar a query para inserir os dados na tabela
-        $result = mysqli_query($conexao, "INSERT INTO usuários(nome,email,senha,matricula,telefone)  VALUES('$nome', '$email', '$senha', '$matricula', '$telefone')");
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+    $matricula = $_POST['matricula'];
+    $telefone = $_POST['telefone'];
+    
+    // Executar a query para inserir os dados na tabela
+    $result = mysqli_query($conexao, "INSERT INTO alunos(nome,email,senha,matricula,telefone) VALUES('$nome', '$email', '$senha', '$matricula', '$telefone')");
 
-        // Verificar se a inserção foi bem-sucedida
-        if($result) {
-            // Registro bem-sucedido, mostrar mensagem usando JavaScript
-            echo '<script>alert("Registrado com sucesso!");</script>';
-            // Redirecionar para a página de login após mostrar a mensagem
-            echo '<script>window.location.href = "login.php";</script>';
-            // Encerrar o script PHP
-            exit;
-        }
+    // Verificar se a inserção foi bem-sucedida
+    if ($result) {
+        // Redirecionar para a página de sucesso com o pop-up
+        header('Location: alunos_popup_sucesso.php');
+        exit;
+    } else {
+        // Em caso de falha na inserção
+        echo "Erro ao registrar: " . mysqli_error($conexao);
     }
+
+    // Fecha a conexão com o banco de dados
+    mysqli_close($conexao);
+}
 ?>
 
 
@@ -30,7 +33,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>Cadastro | Aluno</title>
     <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -149,9 +152,9 @@
     <a href="home.php" class="back-btn"><i class="fas fa-arrow-left"></i>VOLTAR</a>
     <div class="container">
         <div class="form-container">
-            <form action="formulario.php" method="POST">
+            <form action="formulario_aluno.php" method="POST">
                 <fieldset>
-                    <legend><b>Cadastro de Clientes</b></legend>
+                    <legend><b>Cadastro de Alunos</b></legend>
                     <div class="inputBox">
                         <input type="text" name="nome" id="nome" class="inputUser" required>
                         <label for="nome" class="LabelInput">Nome completo</label>
@@ -186,7 +189,7 @@
                     <input type="submit" name="submit" id="submit" value="Cadastrar">
                 </fieldset>
             </form>
-            <p>Já tem uma conta? <a href="login.php" style="color: #568915;">Faça login aqui</a>.</p>
+            <p>Já tem uma conta? <a href="login_aluno.php" style="color: #568915;">Faça login aqui</a>.</p>
         </div>
     </div>
 </body>

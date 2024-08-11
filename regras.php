@@ -2,10 +2,10 @@
 session_start();
 
 // Verificar se a sessão está definida para 'matricula' e não está definida para 'senha'
-if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
-    unset($_SESSION['cpf']);
+if (isset($_SESSION['matricula']) && !isset($_SESSION['senha'])) {
+    unset($_SESSION['matricula']);
     unset($_SESSION['senha']);
-    header('Location: login_comunidade.php');
+    header('Location: regras.php');
     exit; // Adicione o exit para garantir que o script pare após o redirecionamento
 }
 ?>
@@ -14,12 +14,12 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaiman System | Regras Alunos</title>
+    <title>Kaiman System | Regras Alunos </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to right, #dfe2e6, #829d5e);
+            background: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
             color: white;
             text-align: center;
             font-family: Arial, sans-serif;
@@ -38,26 +38,11 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
             top: 0;
             width: 100%;
             z-index: 1000;
-            background-color: #829d5e;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
         }
 
         .navbar-brand {
             font-family: 'Bebas Neue', cursive;
-            font-size: 19px;
-            color: white;
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar-brand img {
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
+            font-size: 28px;
         }
 
         .btn-danger {
@@ -65,7 +50,7 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
         }
 
         .rules {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             padding: 20px;
             margin: 20px;
@@ -75,7 +60,7 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
         }
 
         .rules h2 {
-            color: #829d5e; /* Verde do projeto */
+            color: #ffd700; /* Amarelo ouro */
             font-family: 'Bebas Neue', cursive;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;
@@ -103,17 +88,16 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="#">
-            <img src="IMG/perfil.png" alt="Perfil">
-            Meu Perfil
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="d-flex">
-            <a href="sair.php" class="btn btn-danger me-3">Sair</a>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">K.A.I.M.A.N | SYSTEM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="d-flex">
+                <a href="sair.php" class="btn btn-danger me-3">Sair</a>
+            </div>
+        </div> 
     </nav> 
     <div class="rules">
         <h2>Regras da Biblioteca</h2>
@@ -128,11 +112,5 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNOM9JpP8djnkYCy2A4GTLwIF3p0gJ/rf6V1L2Z4p4p3moV9EAO/JZyw6nL2N1N" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVki6k2guE+6Q8XufuhLXciIpluYN4YF7Q1pFf02mC0p4TmK2thH6ke77c/wkckk" crossorigin="anonymous"></script>
-
 </body>
 </html>
-</body>
-</html>
-
-
-

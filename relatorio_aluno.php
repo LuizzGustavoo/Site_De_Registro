@@ -10,7 +10,7 @@ function gerarPDF($conexao) {
     $pdf->SetFont('Arial', 'B', 14); // Tamanho da fonte maior para o título
 
     // Título do documento
-    $pdf->Cell(0, 10, utf8_decode('Relatório dos Alunos'), 0, 1, 'C');
+    $pdf->Cell(0, 10, utf8_decode('Relatório de Usuários'), 0, 1, 'C');
     $pdf->Ln(10); // Adiciona um espaço após o título
 
     // Calcula a largura total da tabela
@@ -32,7 +32,7 @@ function gerarPDF($conexao) {
 
     // Dados dos usuários
     $pdf->SetFont('Arial', '', 10);
-    $sql = "SELECT id, nome, matricula, email, senha FROM alunos";
+    $sql = "SELECT id, nome, matricula, email, senha FROM usuários";
     $result = $conexao->query($sql);
 
     if ($result->num_rows > 0) {
@@ -51,7 +51,7 @@ function gerarPDF($conexao) {
     }
 
     // Saída do PDF
-    $pdf->Output('D', 'relatorio_alunos.pdf'); // 'D' força o download do PDF
+    $pdf->Output('D', 'relatorio_usuarios.pdf'); // 'D' força o download do PDF
     exit();
 }
 

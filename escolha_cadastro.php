@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOME | Kaiman System</title>
+    <title>Escolha de Cadastro | Kaiman System</title>
     <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -46,52 +46,15 @@
         a:hover {
             background-color: #568915;
         }
-        .social-links {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-        }
-        .social-links a {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 50%;
-            border: 3px solid #568915;
-            font-size: 20px;
-        }
-        .social-links a:hover {
-            background-color: #568915;
-        }
-        .author-info {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-        }
-        .verified-icon {
-            color: #568915;
-            margin-left: 5px;
-        }
     </style>
 </head>
 <body>
     <div class="box">
-        <h1>Seja Bem Vindo(a)!!</h1>
-        <h3>Escolha o Tipo de Login ou faça o cadastro</h3>
+        <h1>Escolha o Tipo de Cadastro</h1>
         <br>
-        <a href="login_aluno.php">Alunos</a>
-        <a href="login_servidores.php">Servidores</a>
-        <a href="login_comunidade.php">Comunidade</a>
-        <br>
-        <a href="escolha_cadastro.php">Cadastre-se</a>
-    </div>
-    <div class="social-links">
-        <a href="https://github.com/LuizzGustavoo/Site_De_Registro" target="_blank"><i class="fab fa-github"></i></a>
-    </div>
-    <br>
-    <br>
-    <div class="author-info"> <i class="fas fa-check-circle verified-icon"></i>
+        <a href="formulario_aluno.php">Alunos</a>
+        <a href="formulario_servidores.php">Servidores</a>
+        <a href="formulario_comunidade.php">Comunidade</a>
     </div>
 </body>
 </html>

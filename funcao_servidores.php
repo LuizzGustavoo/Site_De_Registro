@@ -10,7 +10,7 @@ function gerarPDF($conexao) {
     $pdf->SetFont('Arial', 'B', 14); // Tamanho da fonte maior para o título
 
     // Título do documento
-    $pdf->Cell(0, 10, utf8_decode('Relatório dos Alunos'), 0, 1, 'C');
+    $pdf->Cell(0, 10, utf8_decode('Relatório de Usuários'), 0, 1, 'C');
     $pdf->Ln(10); // Adiciona um espaço após o título
 
     // Calcula a largura total da tabela
@@ -32,7 +32,7 @@ function gerarPDF($conexao) {
 
     // Dados dos usuários
     $pdf->SetFont('Arial', '', 10);
-    $sql = "SELECT id, nome, matricula, email, senha FROM alunos";
+    $sql = "SELECT id, nome, matricula, email, senha FROM usuários";
     $result = $conexao->query($sql);
 
     if ($result->num_rows > 0) {
@@ -51,7 +51,7 @@ function gerarPDF($conexao) {
     }
 
     // Saída do PDF
-    $pdf->Output('D', 'relatorio_alunos.pdf'); // 'D' força o download do PDF
+    $pdf->Output('D', 'relatorio_usuarios.pdf'); // 'D' força o download do PDF
     exit();
 }
 
@@ -66,62 +66,58 @@ if (isset($_POST['gerar_pdf'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaiman System | Admin</title>
+    <title>Escolha de Funções | Kaiman System</title>
+    <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Estilos gerais */
+        @import url('https://fonts.cdnfonts.com/css/bebas-neue');
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Bebas Neue', sans-serif;
             background-image: linear-gradient(to bottom, #dfe2e6, #829d5e);
-        }
-
-        /* Estilo do contêiner principal */
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 300px;
-        }
-
-        /* Estilo do título */
-        h1 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 36px;
+            color: #ffffff;
+            margin: 0;
+            height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        } 
+        .box {
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 20px;
+            display: inline-block;
             margin-bottom: 20px;
-            color: #333;
-        }
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 500px;
 
-        /* Estilo do botão */
-        input[type="submit"] {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 18px;
-            background-color: #829d5e;
+            margin: 0 auto; /* Center horizontally */
+        }
+        a {
+            text-decoration: none;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            border: 3px solid #568915;
+            border-radius: 15px;
+            padding: 10px;
+            margin: 0 10px;
+            display: block;
+            margin-bottom: 10px;
         }
-
-        input[type="submit"]:hover {
-            background-color: #6d834f;
+        a:hover {
+            background-color: #568915;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Gerar Relatório | Alunos </h1>
-        <form action="gerar_relatorio.php" method="POST">
-            <input type="submit" name="gerar_pdf" value="Gerar PDF">
-        </form>
+    <div class="box">
+        <h1>Escolha o Tipo de Função</h1>
+        <br>
+        <a href="relatorio_comunidade.php">Relatorio | Comunidade </a>
+        <a href="relatorio_aluno.php">Relatorio | Alunos</a>
+        <a href="test2.php">Edição de dados | Comunidade</a>
     </div>
 </body>
 </html>

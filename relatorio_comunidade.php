@@ -10,7 +10,7 @@ function gerarPDF($conexao) {
     $pdf->SetFont('Arial', 'B', 14); // Tamanho da fonte maior para o título
 
     // Título do documento
-    $pdf->Cell(0, 10, utf8_decode('Relatório dos Alunos'), 0, 1, 'C');
+    $pdf->Cell(0, 10, utf8_decode('Relatório da Comunidade'), 0, 1, 'C');
     $pdf->Ln(10); // Adiciona um espaço após o título
 
     // Calcula a largura total da tabela
@@ -25,14 +25,14 @@ function gerarPDF($conexao) {
     $pdf->SetFont('Arial', 'B', 12); // Aumentar a fonte dos cabeçalhos
     $pdf->Cell(15, 12, 'ID', 1);
     $pdf->Cell(55, 12, utf8_decode('Nome'), 1);
-    $pdf->Cell(50, 12, utf8_decode('Matrícula'), 1);
+    $pdf->Cell(50, 12, utf8_decode('cpf'), 1);
     $pdf->Cell(60, 12, utf8_decode('Email'), 1);
     $pdf->Cell(30, 12, utf8_decode('Senha'), 1);
     $pdf->Ln();
 
     // Dados dos usuários
     $pdf->SetFont('Arial', '', 10);
-    $sql = "SELECT id, nome, matricula, email, senha FROM alunos";
+    $sql = "SELECT id, nome, matricula, cpf, senha FROM comunidade";
     $result = $conexao->query($sql);
 
     if ($result->num_rows > 0) {
@@ -40,7 +40,7 @@ function gerarPDF($conexao) {
             $pdf->SetX($marginX); // Centraliza cada linha de dados
             $pdf->Cell(15, 10, $row['id'], 1);
             $pdf->Cell(55, 10, utf8_decode($row['nome']), 1);
-            $pdf->Cell(50, 10, utf8_decode($row['matricula']), 1);
+            $pdf->Cell(50, 10, utf8_decode($row['cpf']), 1);
             $pdf->Cell(60, 10, utf8_decode($row['email']), 1);
             // Esconder a senha real
             $pdf->Cell(30, 10, '******', 1);
@@ -51,7 +51,7 @@ function gerarPDF($conexao) {
     }
 
     // Saída do PDF
-    $pdf->Output('D', 'relatorio_alunos.pdf'); // 'D' força o download do PDF
+    $pdf->Output('D', 'relatorio_Comunidade.pdf'); // 'D' força o download do PDF
     exit();
 }
 
@@ -118,8 +118,8 @@ if (isset($_POST['gerar_pdf'])) {
 </head>
 <body>
     <div class="container">
-        <h1>Gerar Relatório | Alunos </h1>
-        <form action="gerar_relatorio.php" method="POST">
+        <h1>Gerar Relatório | Comunidade </h1>
+        <form action="gerar_relatorio2.php" method="POST">
             <input type="submit" name="gerar_pdf" value="Gerar PDF">
         </form>
     </div>
