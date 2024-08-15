@@ -8,9 +8,10 @@ if (isset($_POST['submit'])) {
     $senha = $_POST['senha'];
     $matricula = $_POST['matricula'];
     $telefone = $_POST['telefone'];
-    
+    $safe_key = $_POST['safe_key']; // Adicionado
+
     // Executar a query para inserir os dados na tabela
-    $result = mysqli_query($conexao, "INSERT INTO alunos(nome,email,senha,matricula,telefone) VALUES('$nome', '$email', '$senha', '$matricula', '$telefone')");
+    $result = mysqli_query($conexao, "INSERT INTO alunos(nome,email,senha,matricula,telefone,safe_key) VALUES('$nome', '$email', '$senha', '$matricula', '$telefone', '$safe_key')");
 
     // Verificar se a inserção foi bem-sucedida
     if ($result) {
@@ -39,7 +40,6 @@ if (isset($_POST['submit'])) {
     <style>
         @import url('https://fonts.cdnfonts.com/css/bebas-neue');
 
-
         body {
             font-family: 'Bebas Neue', sans-serif;
             background-image: linear-gradient(to bottom, #dfe2e6, #829d5e);
@@ -47,6 +47,7 @@ if (isset($_POST['submit'])) {
             padding: 0;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -57,21 +58,20 @@ if (isset($_POST['submit'])) {
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            position: relative; /* Para permitir posicionamento absoluto dentro */
+            position: relative;
         }
         .back-btn {
             background-color: rgba(0, 0, 0, 0.7);
             color: #ffffff;
             border: none;
             padding: 10px 20px;
-            border-radius: 5px;  
+            border-radius: 5px;
             text-decoration: none;
             font-size: 16px;
             cursor: pointer;
             position: absolute;
             top: 20px;
             left: 20px;
-            margin-top: 10px; /* Apenas um pouco abaixo */
         }
         .back-btn:hover {
             background-color: #568915;
@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
             margin-right: 5px;
         }
         .form-container {
-            margin-top: 30px; /* Ajusta o espaço entre o botão e o formulário */
+            margin-top: 30px;
             color: #ffffff;
         }
         .inputBox {
@@ -146,6 +146,14 @@ if (isset($_POST['submit'])) {
         .curso-options input {
             margin-right: 10px;
         }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: red;
+        }
+        .footer b {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -160,7 +168,7 @@ if (isset($_POST['submit'])) {
                         <label for="nome" class="LabelInput">Nome completo</label>
                     </div>
                     <div class="inputBox">
-                        <input type="text" name="email" id="email" class="inputUser" required>
+                        <input type="email" name="email" id="email" class="inputUser" required>
                         <label for="email" class="LabelInput">Email</label>
                     </div>
                     <div class="inputBox">
@@ -174,7 +182,11 @@ if (isset($_POST['submit'])) {
                     <div class="inputBox">
                         <input type="tel" name="telefone" id="telefone" class="inputUser" required>
                         <label for="telefone" class="LabelInput">Telefone</label>
-                    </div>                   
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" name="safe_key" id="safe_key" class="inputUser" required>
+                        <label for="safe_key" class="LabelInput">Chave de Segurança</label>
+                    </div>
                     <div class="inputBox curso-options">
                         <label><b>Curso:</b></label><br>
                         <input type="radio" name="Curso" value="ADS" id="ADS">
@@ -192,5 +204,10 @@ if (isset($_POST['submit'])) {
             <p>Já tem uma conta? <a href="login_aluno.php" style="color: #568915;">Faça login aqui</a>.</p>
         </div>
     </div>
+    <div class="footer">
+        <p><b>A chave de segurança não pode ser compartilhada com ninguém.</b> Ela será utilizada para a troca de senhas.</p>
+    </div>
 </body>
 </html>
+
+

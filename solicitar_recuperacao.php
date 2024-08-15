@@ -19,25 +19,27 @@
             align-items: center;
         }
         .container {
-            width: 80%;
+            width: 90%;
             max-width: 400px;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
         }
         h1 {
             margin-bottom: 20px;
             color: #ffffff;
-            text-align: center;
         }
         label {
             color: #ffffff;
             display: block;
             margin-bottom: 10px;
+            text-align: left;
         }
-        input[type="email"] {
-            width: 100%;
+        input[type="email"],
+        input[type="text"] {
+            width: calc(100% - 22px); /* Adjusted for padding and border */
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ffffff;
@@ -46,11 +48,12 @@
             color: #ffffff;
             background-color: transparent;
         }
-        input[type="email"]::placeholder {
+        input[type="email"]::placeholder,
+        input[type="text"]::placeholder {
             color: #ffffff;
         }
         input[type="submit"] {
-            background-image: linear-gradient(to right, #568915, green);
+            background-image: linear-gradient(to right, #568915, #3c6e3e);
             width: 100%;
             border: none;
             padding: 15px;
@@ -61,7 +64,7 @@
             margin-top: 20px;
         }
         input[type="submit"]:hover {
-            background-image: linear-gradient(to right, #568915, green);
+            background-image: linear-gradient(to right, #3c6e3e, #568915);
         }
     </style>
 </head>
@@ -71,8 +74,11 @@
         <form action="gerar_token.php" method="POST">
             <label for="email">Digite seu e-mail:</label>
             <input type="email" id="email" name="email" placeholder="seu-email@exemplo.com" required>
+            <label for="safe_key">Digite sua chave de segurança:</label>
+            <input type="text" id="safe_key" name="safe_key" placeholder="exemplo123" required>
             <input type="submit" value="Enviar">
         </form>
     </div>
 </body>
 </html>
+
