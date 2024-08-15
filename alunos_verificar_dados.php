@@ -10,11 +10,13 @@ if (!isset($_SESSION['matricula'])) {
 
 $matricula = $_SESSION['matricula'];
 
-$sql = "SELECT nome, email, telefone FROM alunos WHERE matricula = ?";
+// Consulta SQL atualizada para incluir safe_key
+$sql = "SELECT nome, email, telefone, safe_key FROM alunos WHERE matricula = ?";
 if ($stmt = $conexao->prepare($sql)) {
     $stmt->bind_param('s', $matricula);
     $stmt->execute();
-    $stmt->bind_result($nome, $email, $telefone);
+    // Bind the result including safe_key
+    $stmt->bind_result($nome, $email, $telefone, $safe_key);
     $stmt->fetch();
     $stmt->close();
 } else {
@@ -109,6 +111,7 @@ if ($stmt = $conexao->prepare($sql)) {
         <p><strong>Nome:</strong> <?php echo htmlspecialchars($nome); ?></p>
         <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
         <p><strong>Telefone:</strong> <?php echo htmlspecialchars($telefone); ?></p>
+        <p><strong>Chave de segurança:</strong> <?php echo htmlspecialchars($safe_key); ?></p>
     </div>
 
 </body>

@@ -117,7 +117,7 @@ if (isset($_POST['gerar_pdf'])) {
         <br>
         <a href="relatorio_comunidade.php">Relatorio | Comunidade </a>
         <a href="relatorio_aluno.php">Relatorio | Alunos</a>
-        <a href="edit_dados.php">Edição de dados | Comunidade</a>
+        <a href="edit_dados.php">Auditoria de dados</a>
     </div>
 </body>
 </html>

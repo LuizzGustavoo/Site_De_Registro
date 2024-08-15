@@ -1,42 +1,32 @@
 <?php
 include_once('config.php');
 
-$mensagem = ''; // Variável para armazenar mensagens
+$token = $_GET['token'] ?? '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['token']) && isset($_POST['nova_senha'])) {
-        $token = $_POST['token'];
-        $nova_senha = $_POST['nova_senha'];
+    $nova_senha = $_POST['nova_senha'];
 
-        // Validar token
-        $sql = "SELECT * FROM usuários WHERE token_recuperacao = ? AND data_token > NOW() - INTERVAL 1 HOUR";
+    // Validar o token e obter o email associado
+    $sql = "SELECT email FROM alunos WHERE token_recuperacao = ? AND TIMESTAMPDIFF(HOUR, data_token, NOW()) < 24";
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param('s', $token);
+    $stmt->execute();
+    $stmt->bind_result($email);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($email) {
+        // Atualizar a senha no banco de dados (sem hashing)
+        $sql = "UPDATE alunos SET senha = ?, token_recuperacao = NULL, data_token = NULL WHERE email = ?";
         $stmt = $conexao->prepare($sql);
-        $stmt->bind_param('s', $token);
+        $stmt->bind_param('ss', $nova_senha, $email);
         $stmt->execute();
-        $result = $stmt->get_result();
+        $stmt->close();
 
-        if ($result->num_rows > 0) {
-            // Atualizar senha e limpar token
-            $sql = "UPDATE usuários SET senha = ?, token_recuperacao = NULL WHERE token_recuperacao = ?";
-            $stmt = $conexao->prepare($sql);
-            $stmt->bind_param('ss', $nova_senha, $token);
-            if ($stmt->execute()) {
-                $mensagem = "Senha atualizada com sucesso!";
-            } else {
-                $mensagem = "Erro ao atualizar a senha.";
-            }
-        } else {
-            $mensagem = "Token inválido ou expirado.";
-        }
+        echo "Senha redefinida com sucesso!";
+        header('Location:popup_geral.php');
     } else {
-        $mensagem = "Token ou nova senha não fornecidos.";
-    }
-} else {
-    if (isset($_GET['token'])) {
-        $token = $_GET['token'];
-    } else {
-        $mensagem = "Token não fornecido.";
-        exit;
+        echo "Token inválido ou expirado.";
     }
 }
 ?>
@@ -62,76 +52,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             align-items: center;
         }
         .container {
-            width: 80%;
+            width: 90%;
             max-width: 400px;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
         }
         h1 {
             margin-bottom: 20px;
             color: #ffffff;
-            text-align: center;
+        }
+        label {
+            color: #ffffff;
+            display: block;
+            margin-bottom: 10px;
+            text-align: left;
         }
         input[type="password"] {
-            width: 100%;
-            padding: 4px;
-            margin: 5px 0;
+            width: calc(100% - 22px); /* Ajustado para o padding e border */
+            padding: 10px;
+            margin-bottom: 20px;
             border: 1px solid #ffffff;
-            border-radius: 4px;
-            background: none;
+            border-radius: 5px;
+            outline: none;
             color: #ffffff;
-        }
-        input[type="password"]::placeholder {
-            color: #ffffff;
+            background-color: transparent;
         }
         input[type="submit"] {
-            background-image: linear-gradient(to right, #568915, green);
+            background-image: linear-gradient(to right, #568915, #3c6e3e);
             width: 100%;
             border: none;
             padding: 15px;
             color: #ffffff;
             font-size: 15px;
             cursor: pointer;
-            border-radius: 10px; 
+            border-radius: 10px;
             margin-top: 20px;
         }
         input[type="submit"]:hover {
-            background-image: linear-gradient(to right, #568915, green);
-        }
-        .mensagem { 
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 4px;
-            text-align: center;
-        }
-        .sucesso {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .erro {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background-image: linear-gradient(to right, #3c6e3e, #568915);
         }
     </style>
 </head>
-<body>
+<body>  
     <div class="container">
         <h1>Redefinir Senha</h1>
-        <?php if ($mensagem): ?>
-            <div class="mensagem <?php echo strpos($mensagem, 'sucesso') !== false ? 'sucesso' : 'erro'; ?>">
-                <?php echo htmlspecialchars($mensagem); ?>
-            </div>
-        <?php endif; ?>
-        <form action="resetar_senha.php" method="POST">
-            <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
-            Nova Senha: <input type="password" name="nova_senha" required><br>
+        <form action="" method="POST">
+            <label for="nova_senha">Digite sua nova senha:</label>
+            <input type="password" id="nova_senha" name="nova_senha" required>
             <input type="submit" value="Redefinir Senha">
         </form>
-        <p>Voltar para página de login: <a href="login.php" style="color: #829d5e;">LOGIN</a>.</p>
     </div>
 </body>
 </html>
