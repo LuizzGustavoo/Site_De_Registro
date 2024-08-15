@@ -18,20 +18,21 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: linear-gradient(to right, #dfe2e6, #829d5e);
-            color: white;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding-top: 60px; /* Espaço para a barra de navegação */
-        }
+    body {
+        background: url('IMG/biblioteca.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 60px; /* Espaço para a barra de navegação */
+    }
 
         .navbar {
             position: fixed;
