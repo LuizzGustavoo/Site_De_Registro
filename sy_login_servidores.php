@@ -47,7 +47,7 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
             $_SESSION['error'] = "Erro ao executar a consulta: " . $stmt->error;
             header('Location: home.php');
             exit;
-        }
+        }   
 
         // Fecha a declaração
         $stmt->close();

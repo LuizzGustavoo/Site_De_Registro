@@ -8,13 +8,29 @@ if (!isset($_SESSION['matricula'])) {
     exit;
 }
 
-// Exibir o tempo de login do usuário
 $matricula = $_SESSION['matricula'];
-$sql = "SELECT tempo_login FROM alunos WHERE matricula = ?";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+
+    $sql = "UPDATE alunos SET nome = ?, email = ?, telefone = ? WHERE matricula = ?";
+    if ($stmt = $conexao->prepare($sql)) {
+        $stmt->bind_param('ssss', $nome, $email, $telefone, $matricula);
+        $stmt->execute();
+        $stmt->close();
+        $message = "Dados atualizados com sucesso!";
+    } else {
+        $message = "Erro na atualização: " . $conexao->error;
+    }
+}
+
+$sql = "SELECT nome, email, telefone FROM alunos WHERE matricula = ?";
 if ($stmt = $conexao->prepare($sql)) {
     $stmt->bind_param('s', $matricula);
     $stmt->execute();
-    $stmt->bind_result($tempo_login);
+    $stmt->bind_result($nome, $email, $telefone);
     $stmt->fetch();
     $stmt->close();
 } else {
@@ -22,12 +38,13 @@ if ($stmt = $conexao->prepare($sql)) {
     exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaiman System | Regras Alunos</title>
+    <title>Kaiman System | Alterar Dados</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
@@ -61,15 +78,6 @@ if ($stmt = $conexao->prepare($sql)) {
             font-family: 'Bebas Neue', cursive;
             font-size: 16px; /* Fonte reduzida para 16px */
             color: white;
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar-brand img {
-            border-radius: 50%;
-            width: 30px; /* Tamanho reduzido para 30px */
-            height: 30px; /* Tamanho reduzido para 30px */
-            margin-right: 10px;
         }
 
         .btn-danger {
@@ -77,7 +85,7 @@ if ($stmt = $conexao->prepare($sql)) {
             font-size: 14px; /* Fonte reduzida para 14px */
         }
 
-        .rules {
+        .form-container {
             background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             padding: 20px;
@@ -86,7 +94,7 @@ if ($stmt = $conexao->prepare($sql)) {
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
 
-        .rules h2 {
+        .form-container h2 {
             color: #829d5e;
             font-family: 'Bebas Neue', cursive;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -94,23 +102,14 @@ if ($stmt = $conexao->prepare($sql)) {
             font-size: 36px;
         }
 
-        .rules ul {
+        .form-container label {
             text-align: left;
-            list-style-type: none;
-            padding: 0;
+            display: block;
+            margin: 10px 0 5px;
         }
 
-        .rules ul li {
-            background: rgba(0, 0, 0, 0.2);
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        #cronometro {
-            font-size: 24px;
-            margin-top: 20px;
+        .form-container input {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -121,47 +120,26 @@ if ($stmt = $conexao->prepare($sql)) {
             Meu Perfil
         </a>
         <div class="d-flex">
-            <a href="sair.php" class="btn btn-danger me-3" onclick="registrarLogout()">Sair</a>
+            <a href="sair.php" class="btn btn-danger me-3">Sair</a>
         </div>
     </nav> 
-    <div class="rules">
-        <h2>Regras da Biblioteca</h2>
-        <ul>
-            <li>Mantenha o silêncio para não atrapalhar os demais usuários.</li>
-            <li>Não utilizar os computadores para jogar.</li>
-            <li>Cuide dos livros e do espaço, mantenha tudo organizado.</li>
-            <li>Respeite os prazos de devolução dos livros.</li>
-            <li>Não coma ou beba dentro da biblioteca.</li>
-            <li>Utilize os computadores apenas para atividades acadêmicas.</li>
-        </ul>
-        <div id="cronometro">Tempo online: 00:00:00</div>
+
+    <div class="form-container">
+        <h2>Alterar Dados</h2>
+        <?php if (isset($message)) { echo "<p>$message</p>"; } ?>
+        <form action="" method="POST">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($nome); ?>" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" value="<?php echo htmlspecialchars($telefone); ?>" required>
+
+            <button type="submit" class="btn btn-success">Salvar Alterações</button>
+        </form>
     </div>
 
-    <script>
-        let startTime = new Date("<?php echo $tempo_login; ?>").getTime();
-        let interval = setInterval(function() {
-            let now = new Date().getTime();
-            let elapsedTime = now - startTime;
-
-            let hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-
-            hours = hours < 10 ? "0" + hours : hours;
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            document.getElementById("cronometro").innerHTML = "Tempo online: " + hours + ":" + minutes + ":" + seconds;
-        }, 1000);
-
-        function registrarLogout() {
-            // Faça uma requisição AJAX para salvar o tempo de logout
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "aluno_registrar_logout.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send("matricula=<?php echo $matricula; ?>");
-        }
-    </script>
 </body>
 </html>
-

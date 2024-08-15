@@ -14,7 +14,7 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaiman System | Regras Alunos</title>
+    <title>Kaiman System | Regras Comunidade</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
@@ -104,7 +104,7 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
 </head>
 <body>
     <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="perfil_comunidade.php">
             <img src="IMG/perfil.png" alt="Perfil">
             Meu Perfil
         </a>

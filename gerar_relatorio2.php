@@ -69,51 +69,83 @@ if (isset($_POST['gerar_pdf'])) {
     <title>Kaiman System | Admin</title>
     <style>
         /* Estilos gerais */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-image: linear-gradient(to bottom, #dfe2e6, #829d5e);
-        }
+        /* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(to bottom, #f0f4f8, #c6d5d8);
+}
 
-        /* Estilo do contêiner principal */
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 300px;
-        }
+/* Estilo do contêiner principal */
+.container {
+    background-color: #ffffff;
+    padding: 60px; /* Aumenta o padding */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 500px; /* Aumenta a largura do contêiner */
+    max-width: 90%;
+}
 
-        /* Estilo do título */
-        h1 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #333;
-        }
+/* Estilo do título */
+h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 30px; /* Aumenta o tamanho da fonte */
+    margin: 0 0 30px; /* Ajusta a margem */
+    color: #333;
+    text-align: center; /* Centraliza o título */
+    white-space: nowrap; /* Impede a quebra de linha */
+    overflow: hidden; /* Oculta qualquer texto que exceda o contêiner */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
+}
 
-        /* Estilo do botão */
-        input[type="submit"] {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 18px;
-            background-color: #829d5e;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+/* Estilo dos campos do formulário */
+label {
+    display: block;
+    font-size: 15px; /* Aumenta o tamanho da fonte */
+    margin: 12px 0 6px; /* Ajusta a margem */
+    color: #555;
+}
 
-        input[type="submit"]:hover {
-            background-color: #6d834f;
-        }
+input[type="date"], select {
+    width: calc(100% - 20px);
+    padding: 14px; /* Aumenta o padding dos campos */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px; /* Aumenta o espaçamento entre os campos */
+    box-sizing: border-box;
+}
+
+/* Estilo do botão */
+input[type="submit"] {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 15px; /* Aumenta o tamanho da fonte */
+    background-color: #829d5e;
+    color: white;
+    border: none;
+    padding: 16px 24px; /* Aumenta o padding do botão */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="submit"]:hover {
+    background-color: #6d834f;
+    transform: translateY(-2px);
+}
+
+input[type="submit"]:active {
+    background-color: #5a6b4f;
+    transform: translateY(0);
+}
+
     </style>
 </head>
 <body>
