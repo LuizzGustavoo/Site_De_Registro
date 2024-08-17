@@ -31,21 +31,21 @@ if ($stmt = $conexao->prepare($sql)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
-    body {
-        background: url('IMG/biblioteca.jpg') no-repeat center center fixed;
-        background-size: cover;
-        color: white;
-        text-align: center;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-top: 60px; /* Espaço para a barra de navegação */
-    }
+        body {
+            background: url('IMG/biblioteca.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 60px;
+        }
 
         .navbar {
             position: fixed;
@@ -54,15 +54,15 @@ if ($stmt = $conexao->prepare($sql)) {
             background-color: #829d5e;
             display: flex;
             justify-content: space-between;
-            padding: 0 10px; /* Reduzido para 10px */
+            padding: 0 10px;
             z-index: 1000;
-            height: 50px; /* Altura reduzida para 50px */
-            align-items: center; /* Alinha o conteúdo verticalmente no centro */
+            height: 50px;
+            align-items: center;
         }
 
         .navbar-brand {
             font-family: 'Bebas Neue', cursive;
-            font-size: 16px; /* Fonte reduzida para 16px */
+            font-size: 16px;
             color: white;
             display: flex;
             align-items: center;
@@ -70,14 +70,14 @@ if ($stmt = $conexao->prepare($sql)) {
 
         .navbar-brand img {
             border-radius: 50%;
-            width: 30px; /* Tamanho reduzido para 30px */
-            height: 30px; /* Tamanho reduzido para 30px */
+            width: 30px;
+            height: 30px;
             margin-right: 10px;
         }
 
         .btn-danger {
             font-family: 'Bebas Neue', cursive;
-            font-size: 14px; /* Fonte reduzida para 14px */
+            font-size: 14px;
         }
 
         .rules {
@@ -109,11 +109,14 @@ if ($stmt = $conexao->prepare($sql)) {
             padding: 10px;
             border-radius: 5px;
             color: white;
+            opacity: 0; /* Inicia oculto */
+            transform: translateY(20px); /* Inicia deslocado para baixo */
         }
 
         #cronometro {
             font-size: 24px;
             margin-top: 20px;
+            transition: color 0.5s;
         }
     </style>
 </head>
@@ -124,12 +127,12 @@ if ($stmt = $conexao->prepare($sql)) {
             Meu Perfil
         </a>
         <div class="d-flex">
-            <a href="sair.php" class="btn btn-danger me-3" onclick="registrarLogout()">Sair</a>
+            <a href="sair.php" class="btn btn-danger me-3" onclick="registrarLogout(event)">Sair</a>
         </div>
-    </nav> 
+    </nav>
     <div class="rules">
         <h2>Regras da Biblioteca</h2>
-        <ul>
+        <ul id="rules-list">
             <li>Mantenha o silêncio para não atrapalhar os demais usuários.</li>
             <li>Não utilizar os computadores para jogar.</li>
             <li>Cuide dos livros e do espaço, mantenha tudo organizado.</li>
@@ -141,8 +144,18 @@ if ($stmt = $conexao->prepare($sql)) {
     </div>
 
     <script>
+        // Mostrar regras com animação
+        const rulesList = document.querySelectorAll('#rules-list li');
+        rulesList.forEach((rule, index) => {
+            setTimeout(() => {
+                rule.style.opacity = '1';
+                rule.style.transform = 'translateY(0)';
+            }, index * 500);
+        });
+
+        // Cronômetro com mudança de cor
         let startTime = new Date("<?php echo $tempo_login; ?>").getTime();
-        let interval = setInterval(function() {
+        let interval = setInterval(function () {
             let now = new Date().getTime();
             let elapsedTime = now - startTime;
 
@@ -154,17 +167,37 @@ if ($stmt = $conexao->prepare($sql)) {
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            document.getElementById("cronometro").innerHTML = "Tempo online: " + hours + ":" + minutes + ":" + seconds;
+            const cronometro = document.getElementById("cronometro");
+            cronometro.innerHTML = "Tempo online: " + hours + ":" + minutes + ":" + seconds;
+
+            // Muda a cor do cronômetro depois de 30 minutos
+            if (hours > 0 || minutes >= 30) {
+                cronometro.style.color = 'red';
+            } else if (minutes >= 15) {
+                cronometro.style.color = 'orange';
+            }
         }, 1000);
 
-        function registrarLogout() {
-            // Faça uma requisição AJAX para salvar o tempo de logout
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "aluno_registrar_logout.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send("matricula=<?php echo $matricula; ?>");
+        // Confirmação de logout com feedback visual
+        function registrarLogout(event) {
+            event.preventDefault();
+            if (confirm("Você realmente deseja sair?")) {
+                const logoutButton = event.target;
+                logoutButton.textContent = 'Saindo...';
+                logoutButton.classList.add('disabled');
+                
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "aluno_registrar_logout.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("matricula=<?php echo $matricula; ?>");
+                
+                setTimeout(() => {
+                    window.location.href = "sair.php";
+                }, 2000); // Simula um atraso para feedback visual
+            }
         }
     </script>
 </body>
 </html>
+
 
