@@ -21,7 +21,7 @@ $matricula = $_SESSION['matricula'];
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to right, #dfe2e6, #829d5e);
+            background-image: linear-gradient(to top, #92e06e, #3a6925);
             color: white;
             text-align: center;
             font-family: Arial, sans-serif;
@@ -30,7 +30,7 @@ $matricula = $_SESSION['matricula'];
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding-top: 60px; /* Espaço para a barra de navegação */
+            padding-top: 60px;  /* Espaço para a barra de navegação */
         }
 
         .navbar {
@@ -50,6 +50,12 @@ $matricula = $_SESSION['matricula'];
             font-family: 'Bebas Neue', cursive;
             font-size: 16px; /* Fonte reduzida para 16px */
             color: white;
+        }
+        .navbar-brand img {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
         }
 
         .btn-danger {

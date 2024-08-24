@@ -6,14 +6,14 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
     unset($_SESSION['cpf']);
     unset($_SESSION['senha']);
     header('Location: login_comunidade.php');
-    exit; // Adicione o exit para garantir que o script pare após o redirecionamento
+    exit; 
 }
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Kaiman System | Regras Comunidade</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding-top: 60px; /* Espaço para a barra de navegação */
+        padding-top: 60px; 
     }
 
         .navbar {
@@ -76,7 +76,7 @@ if (isset($_SESSION['cpf']) && !isset($_SESSION['senha'])) {
         }
 
         .rules h2 {
-            color: #829d5e; /* Verde do projeto */
+            color: #829d5e; 
             font-family: 'Bebas Neue', cursive;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;

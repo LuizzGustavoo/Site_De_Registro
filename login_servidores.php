@@ -11,7 +11,7 @@
 
         body {
             font-family: 'Bebas Neue', sans-serif;
-            background-image: linear-gradient(to bottom, #dfe2e6, #829d5e);
+            background-image: linear-gradient(to top, #92e06e, #3a6925);
             margin: 0;
             padding: 0;
             display: flex;
@@ -30,7 +30,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .inputSubmit {
-            background-color: #829d5e; /* Same green color as home page */
+            background-color: #829d5e;  /* Same green color as home page */
             width: 100%;
             border: none;
             padding: 15px;

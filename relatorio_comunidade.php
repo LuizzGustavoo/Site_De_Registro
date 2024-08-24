@@ -8,7 +8,7 @@ function gerarPDF($conexao) {
     $pdf = new FPDF();
     $pdf->AddPage();
     $pdf->SetFont('Arial', 'B', 14); // Tamanho da fonte maior para o título
-
+ 
     // Título do documento
     $pdf->Cell(0, 10, utf8_decode('Relatório da Comunidade'), 0, 1, 'C');
     $pdf->Ln(10); // Adiciona um espaço após o título
@@ -77,7 +77,7 @@ if (isset($_POST['gerar_pdf'])) {
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: linear-gradient(to bottom, #dfe2e6, #829d5e);
+            background-image: linear-gradient(to top, #92e06e, #3a6925);
         }
 
         /* Estilo do contêiner principal */

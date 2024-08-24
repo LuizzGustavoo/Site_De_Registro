@@ -6,6 +6,7 @@
     <title>Cadastro Bem-sucedido</title>
     <style>
         body {
+            background-image: linear-gradient(to top, #92e06e, #3a6925);
             font-family: 'Bebas Neue', sans-serif;
             background-color: #dfe2e6;
             margin: 0;
@@ -46,7 +47,7 @@
             }, 2000); // 2000 milissegundos = 2 segundos
         }
         
-        // Chama a função quando a página é carregada
+         // Chama a função quando a página é carregada
         window.onload = redirectAfterDelay;
     </script>
 </head>

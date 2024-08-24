@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     $telefone = $_POST['telefone'];
     $safe_key = $_POST['safe_key']; // Adicionado
 
-    // Executar a query para inserir os dados na tabela
+     // Executar a query para inserir os dados na tabela
     $result = mysqli_query($conexao, "INSERT INTO alunos(nome,email,senha,matricula,telefone,safe_key) VALUES('$nome', '$email', '$senha', '$matricula', '$telefone', '$safe_key')");
 
     // Verificar se a inserção foi bem-sucedida
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
 
         body {
             font-family: 'Bebas Neue', sans-serif;
-            background-image: linear-gradient(to bottom, #dfe2e6, #829d5e);
+            background-image: linear-gradient(to top, #92e06e, #3a6925);
             margin: 0;
             padding: 0;
             height: 100vh;

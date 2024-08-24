@@ -6,6 +6,7 @@
     <title>Cadastro Bem-sucedido</title>
     <style>
         body {
+            background-image: linear-gradient(to top, #92e06e, #3a6925);
             font-family: 'Bebas Neue', sans-serif;
             background-color: #dfe2e6;
             margin: 0;
@@ -39,7 +40,7 @@
         }
     </style>
     <script>
-        // Função para redirecionar após 2 segundos
+         // Função para redirecionar após 2 segundos
         function redirectAfterDelay() {
             setTimeout(function() {
                 window.location.href = 'login_comunidade.php';

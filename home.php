@@ -11,14 +11,14 @@
 
         body {
             font-family: 'Bebas Neue', sans-serif;
-            background-image: linear-gradient(to top, #dfe2e6, #829d5e);
+            background-image: linear-gradient(to top, #92e06e, #3a6925);
             text-align: center;
             color: #ffffff;
             margin: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center; /* Centraliza verticalmente */
+            align-items: center;
             position: relative;
         }
         .box {
@@ -45,15 +45,15 @@
             opacity: 1;
             background-color: #568915;
         }
-        .top-right-container {
+        .top-left-container {
             position: absolute;
             top: 10px;
-            right: 10px;
+            left: 0;
         }
-        .top-right-image {
-            width: 100px;
+        .top-left-image {
+            width: 70%;
             height: auto;
-            border: none; /* Remove border */
+            border: none;
         }
         .social-links {
             position: absolute;
@@ -67,16 +67,16 @@
             border-radius: 50%;
             font-size: 20px;
             color: white;
-            border: 3px solid #568915; /* Keep border */
-            transition: none; /* Remove hover effect */
+            border: 3px solid #568915;
+            transition: none; 
         }
         .social-links a:hover {
-            background-color: transparent; /* Keep transparent background on hover */
+            background-color: transparent;
         }
         .date-time {
             position: absolute;
             top: 10px;
-            left: 10px;
+            right: 10px;
             font-size: 24px;
             color: white;
         }
@@ -94,9 +94,9 @@
     </style>
 </head>
 <body>
-    <div class="top-right-container">
+    <div class="top-left-container">
         <a href="sobre_KS.php">
-            <img src="IMG/jacare_logo.png" alt="Logo" class="top-right-image">
+            <img src="IMG/kaiman_logo.png" alt="Logo" class="top-left-image">
         </a>
     </div>
     <div class="box">
@@ -110,7 +110,7 @@
         <a href="escolha_cadastro.php">Cadastre-se</a>
     </div>
     <div class="social-links">
-        <a href="https://github.com/LuizzGustavoo/Site_De_Registro" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/KaimanSystem/TCC" target="_blank"><i class="fab fa-github"></i></a>
     </div>
     <div class="date-time" id="date-time"></div>
     <div class="author-info">
@@ -118,9 +118,8 @@
     </div>
 
     <script>
-        // Alternating welcome messages
+        // Mensagens splash(sequencial)
         const messages = [
-            "Seja Bem Vindo(a)!!",
             "Bem-vindo ao Kaiman System!",
             "Estamos felizes em vê-lo(a)!"
         ];
@@ -132,7 +131,7 @@
             welcomeMessageElement.textContent = messages[messageIndex];
         }, 3000);
 
-        // Display current date and time
+        // data atual e hora atual
         function updateDateTime() {
             const now = new Date();
             const formattedDate = now.toLocaleDateString('pt-BR', { 
@@ -144,7 +143,7 @@
 
         setInterval(updateDateTime, 1000);
 
-        // Alert after inactivity
+        // Alerta de tempo inativo
         let inactivityTime = function () {
             let time;
             window.onload = resetTimer;
